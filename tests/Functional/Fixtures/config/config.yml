@@ -1,0 +1,28 @@
+framework:
+  secret: 'secret'
+
+doctrine:
+  orm:
+    mappings:
+      main:
+        dir: "%kernel.project_dir%/tests/Functional/Fixtures/Entity"
+        prefix: "Tjovaisas\\Bundle\\DelayedEventBundle\\Tests\\Functional\\Fixtures\\Entity"
+        type: annotation
+        is_bundle: false
+  dbal:
+    driver: pdo_sqlite
+    memory: true
+    charset: UTF8
+
+services:
+  some_event_listener:
+    class: Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Listener\SomeEventListener
+    public: true
+    tags:
+      - { name: 'tjovaisas.event_listener.post_flush', event: !php/const Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Events::ON_EVENT, method: 'onEvent' }
+
+  some_other_event_listener:
+    class: Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Listener\SomeOtherEventListener
+    public: true
+    tags:
+      - { name: 'tjovaisas.event_listener.post_flush', event: !php/const Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Events::ON_EVENT, priority: 1 }
