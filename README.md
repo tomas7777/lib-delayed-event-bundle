@@ -76,10 +76,10 @@ You can check code style issues using this command:
 composer check-style
 ```
 
-[ico-version]: https://img.shields.io/packagist/v/tjovaisas/lib-delayed-event-bundle.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/tjovaisas/delayed-event-bundle?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-phpunit]: https://github.com/tomas7777/lib-delayed-event-bundle/actions/workflows/phpunit.yml/badge.svg
-[ico-downloads]: https://img.shields.io/packagist/dt/tjovaisas/lib-delayed-event-bundle.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/tjovaisas/delayed-event-bundle?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/tjovaisas/lib-delayed-event-bundle
-[link-downloads]: https://packagist.org/packages/tjovaisas/lib-delayed-event-bundle
+[link-packagist]: https://packagist.org/packages/tjovaisas/delayed-event-bundle
+[link-downloads]: https://packagist.org/packages/tjovaisas/delayed-event-bundle
