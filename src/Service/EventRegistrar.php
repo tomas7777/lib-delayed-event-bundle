@@ -6,9 +6,6 @@ namespace Tjovaisas\Bundle\DelayedEventBundle\Service;
 
 use Tjovaisas\Bundle\DelayedEventBundle\DTO\Queue;
 
-/**
- * @api
- */
 class EventRegistrar
 {
     public array $events;

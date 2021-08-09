@@ -7,9 +7,6 @@ namespace Tjovaisas\Bundle\DelayedEventBundle\Service;
 use Closure;
 use Symfony\Contracts\EventDispatcher\Event;
 
-/**
- * @api
- */
 class QueueReleaser
 {
     private EventRegistrar $eventRegistrar;
