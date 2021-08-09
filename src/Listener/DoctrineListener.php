@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace Tjovaisas\Bundle\DelayedEventBundle\Listener;
 
 use Doctrine\ORM\Event\PostFlushEventArgs;
-use Tjovaisas\Bundle\DelayedEventBundle\Service\EventRegistrar;
+use Tjovaisas\Bundle\DelayedEventBundle\Service\QueueReleaser;
 
 class DoctrineListener
 {
-    private $eventRegistrar;
+    private QueueReleaser $queueReleaser;
 
-    public function __construct(EventRegistrar $eventRegistrar)
+    public function __construct(QueueReleaser $queueReleaser)
     {
-        $this->eventRegistrar = $eventRegistrar;
+        $this->queueReleaser = $queueReleaser;
     }
 
     public function postFlush(PostFlushEventArgs $args): void
     {
-        $this->eventRegistrar->release();
+        $this->queueReleaser->release();
     }
 }

@@ -12,10 +12,7 @@ use Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\TestKernel;
 
 abstract class FunctionalTestCase extends TestCase
 {
-    /**
-     * @var TestKernel
-     */
-    protected $kernel;
+    protected TestKernel $kernel;
 
     protected function setUpContainer(): ContainerInterface
     {

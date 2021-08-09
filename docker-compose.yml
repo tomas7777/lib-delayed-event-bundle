@@ -1,0 +1,7 @@
+version: '3.6'
+services:
+  oxylabs_fpm:
+    image: php:7.4-fpm
+    container_name: delayed
+    volumes:
+      - .:/home/app/src

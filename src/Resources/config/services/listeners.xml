@@ -6,7 +6,7 @@
     <services>
         <service class="Tjovaisas\Bundle\DelayedEventBundle\Listener\DoctrineListener"
                  id="tjovaisas.delayed_event.listener.doctrine_listener">
-            <argument type="service" id="tjovaisas.delayed_event.service.event_registrar" />
+            <argument type="service" id="tjovaisas_bundle_delayed_event.service.queue_releaser" />
 
             <tag name="doctrine.event_listener" event="postFlush" method="postFlush" />
         </service>

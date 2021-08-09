@@ -6,5 +6,10 @@
     <services>
         <service class="Tjovaisas\Bundle\DelayedEventBundle\Service\EventRegistrar"
                  id="tjovaisas.delayed_event.service.event_registrar" />
+
+        <service class="Tjovaisas\Bundle\DelayedEventBundle\Service\QueueReleaser"
+                 id="tjovaisas_bundle_delayed_event.service.queue_releaser">
+            <argument type="service" id="tjovaisas.delayed_event.service.event_registrar" />
+        </service>
     </services>
 </container>

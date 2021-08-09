@@ -9,7 +9,7 @@ use Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Entity\Entity;
 
 class SomeEvent extends Event
 {
-    private $entity;
+    private Entity $entity;
 
     public function __construct(Entity $entity)
     {

@@ -26,3 +26,9 @@ services:
     public: true
     tags:
       - { name: 'tjovaisas.event_listener.post_flush', event: !php/const Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Events::ON_EVENT, priority: 1 }
+
+  no_named_event_listener:
+    class: Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Listener\NoNamedEventListener
+    public: true
+    tags:
+      - { name: 'tjovaisas.event_listener.post_flush', event: 'Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Event\SomeEvent', method: 'onEvent' }

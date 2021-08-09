@@ -6,8 +6,12 @@ namespace Tjovaisas\Bundle\DelayedEventBundle\DTO;
 
 class Queue
 {
+    /**
+     * @var mixed
+     */
     private $event;
-    private $listeners;
+
+    private array $listeners;
 
     /**
      * @param mixed $event
@@ -19,6 +23,9 @@ class Queue
         $this->listeners = $listeners;
     }
 
+    /**
+     * @return mixed
+     */
     public function getEvent()
     {
         return $this->event;

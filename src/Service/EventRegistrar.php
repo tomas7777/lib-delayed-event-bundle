@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace Tjovaisas\Bundle\DelayedEventBundle\Service;
 
-use Closure;
-use Symfony\Contracts\EventDispatcher\Event;
 use Tjovaisas\Bundle\DelayedEventBundle\DTO\Queue;
 
+/**
+ * @api
+ */
 class EventRegistrar
 {
-    public $events;
+    public array $events;
 
     /**
      * @var Queue[]
      */
-    public $queue;
+    public array $queue;
 
     public function __construct()
     {
@@ -45,23 +46,16 @@ class EventRegistrar
         $this->queue[] = new Queue($event, $listeners);
     }
 
-    public function release(): void
+    /**
+     * @return Queue[]
+     */
+    public function getQueue(): array
     {
-        foreach ($this->queue as $queue) {
-            $event = $queue->getEvent();
-            $stoppable = $event instanceof Event;
+        return $this->queue;
+    }
 
-            foreach ($queue->getListeners() as $listeners) {
-                foreach ($listeners as $listener) {
-                    if ($stoppable && $event->isPropagationStopped()) {
-                        break 2;
-                    }
-
-                    Closure::fromCallable($listener)($event);
-                }
-            }
-        }
-
+    public function resetQueue(): void
+    {
         $this->queue = [];
     }
 }
