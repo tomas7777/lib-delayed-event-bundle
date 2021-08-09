@@ -24,6 +24,29 @@ flush has been called. There are a few reasons for that:
 composer require tjovaisas/delayed-event-bundle
 ```
 
+### Register the bundle:
+
+**Symfony 3.x version:**\
+Register bundle into `AppKernel.php`:
+```php
+public function registerBundles()
+{
+    return [
+        // ...
+        new \Tjovaisas\Bundle\DelayedEventBundle\TjovaisasDelayedEventBundle(),
+    ];
+}
+```
+
+**Symfony 4.x version:**\
+Register bundle into `config/bundles.php`:
+```php
+return [
+    //...
+    \Tjovaisas\Bundle\DelayedEventBundle\TjovaisasDelayedEventBundle::class => ['all' => true],
+];
+```
+
 ## Usage
 
 The only thing that's needed is to change the default tag from `kernel.event_listener` to `tjovaisas.event_listener.post_flush`:
