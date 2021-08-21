@@ -8,12 +8,12 @@ use Tjovaisas\Bundle\DelayedEventBundle\DTO\Queue;
 
 class EventRegistrar
 {
-    public array $events;
+    private array $events;
 
     /**
      * @var Queue[]
      */
-    public array $queue;
+    private array $queue;
 
     public function __construct()
     {
