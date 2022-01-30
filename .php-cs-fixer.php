@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 $finder = PhpCsFixer\Finder::create()
     ->in(['src', 'tests'])
 ;
 
-return PhpCsFixer\Config::create()
+return (new PhpCsFixer\Config())
     ->setRules([
         '@Symfony' => true,
         '@PSR12' => true,
@@ -30,14 +32,16 @@ return PhpCsFixer\Config::create()
         'operator_linebreak' => ['position' => 'beginning'],
         'array_indentation' => true,
         'ordered_class_elements' => [
-            'use_trait',
-            'constant_public',
-            'constant_protected',
-            'constant_private',
-            'property_public',
-            'property_protected',
-            'property_private',
-            'construct',
+            'order' => [
+                'use_trait',
+                'constant_public',
+                'constant_protected',
+                'constant_private',
+                'property_public',
+                'property_protected',
+                'property_private',
+                'construct',
+            ],
         ],
         'multiline_comment_opening_closing' => true,
         'phpdoc_add_missing_param_annotation' => true,

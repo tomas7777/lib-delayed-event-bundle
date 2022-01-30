@@ -9,11 +9,8 @@ use Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Entity\Entity;
 
 class SomeEvent extends Event
 {
-    private Entity $entity;
-
-    public function __construct(Entity $entity)
+    public function __construct(private Entity $entity)
     {
-        $this->entity = $entity;
     }
 
     public function getEntity(): Entity

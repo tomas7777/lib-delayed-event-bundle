@@ -28,11 +28,7 @@ class EventRegistrar
         return $this;
     }
 
-    /**
-     * @param mixed $event
-     * @param string $eventName
-     */
-    public function onEvent($event, string $eventName): void
+    public function onEvent(mixed $event, string $eventName): void
     {
         if (!isset($this->events[$eventName])) {
             return;

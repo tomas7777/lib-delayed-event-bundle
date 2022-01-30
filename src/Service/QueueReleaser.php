@@ -9,11 +9,8 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class QueueReleaser
 {
-    private EventRegistrar $eventRegistrar;
-
-    public function __construct(EventRegistrar $eventRegistrar)
+    public function __construct(private EventRegistrar $eventRegistrar)
     {
-        $this->eventRegistrar = $eventRegistrar;
     }
 
     public function release(): void

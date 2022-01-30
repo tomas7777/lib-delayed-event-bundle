@@ -9,11 +9,8 @@ use Tjovaisas\Bundle\DelayedEventBundle\Service\QueueReleaser;
 
 class DoctrineListener
 {
-    private QueueReleaser $queueReleaser;
-
-    public function __construct(QueueReleaser $queueReleaser)
+    public function __construct(private QueueReleaser $queueReleaser)
     {
-        $this->queueReleaser = $queueReleaser;
     }
 
     public function postFlush(PostFlushEventArgs $args): void
