@@ -96,7 +96,7 @@ Feel free to create issues and give pull requests.
 
 You can check code style issues using this command:
 ```
-composer check-style
+composer analyze
 ```
 
 [ico-version]: https://img.shields.io/packagist/v/tjovaisas/delayed-event-bundle?style=flat-square
