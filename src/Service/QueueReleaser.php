@@ -15,11 +15,14 @@ class QueueReleaser
 
     public function release(): void
     {
-        foreach ($this->eventRegistrar->getQueue() as $queue) {
-            $event = $queue->getEvent();
+        $queue = $this->eventRegistrar->getQueue();
+        $this->eventRegistrar->resetQueue();
+
+        foreach ($queue as $queueItem) {
+            $event = $queueItem->getEvent();
             $stoppable = $event instanceof Event;
 
-            foreach ($queue->getListeners() as $listeners) {
+            foreach ($queueItem->getListeners() as $listeners) {
                 foreach ($listeners as $listener) {
                     if ($stoppable && $event->isPropagationStopped()) {
                         break 2;
@@ -29,7 +32,5 @@ class QueueReleaser
                 }
             }
         }
-
-        $this->eventRegistrar->resetQueue();
     }
 }

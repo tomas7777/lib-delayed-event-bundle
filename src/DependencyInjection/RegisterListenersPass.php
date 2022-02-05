@@ -12,6 +12,7 @@ use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
 class RegisterListenersPass implements CompilerPassInterface
 {
+    public const TAG_NAME = 'tjovaisas.event_listener.post_flush';
     private const EVENT_REGISTRAR_ID = 'tjovaisas.delayed_event.service.event_registrar';
 
     public function process(ContainerBuilder $container): void
@@ -19,14 +20,14 @@ class RegisterListenersPass implements CompilerPassInterface
         $registrarDefinition = $container->findDefinition(self::EVENT_REGISTRAR_ID);
         $delayedEvents = [];
 
-        foreach ($container->findTaggedServiceIds('tjovaisas.event_listener.post_flush') as $id => $events) {
+        foreach ($container->findTaggedServiceIds(self::TAG_NAME) as $id => $events) {
             foreach ($events as $event) {
                 if (!isset($event['event'])) {
                     throw new InvalidArgumentException(sprintf('"%s" must have event defined', $id));
                 }
 
                 $delayedEvents[] = $event['event'];
-                $method = $event['method'] ?? '__invoke';
+                $method = $this->attemptMethodExtraction($container, $event, $id);
                 $priority = $event['priority'] ?? 0;
 
                 $this->checkMethodExists($container, $method, $id);
@@ -48,8 +49,33 @@ class RegisterListenersPass implements CompilerPassInterface
                         new ServiceClosureArgument(new Reference(self::EVENT_REGISTRAR_ID)),
                         'onEvent',
                     ],
-                ]
+                ],
             );
+        }
+    }
+
+    private function attemptMethodExtraction(ContainerBuilder $container, array $event, string $id): string
+    {
+        if (isset($event['method'])) {
+            $this->checkMethodExists($container, $event['method'], $id);
+
+            return $event['method'];
+        }
+
+        $method = 'on' . preg_replace_callback([
+            '/(?<=\b|_)[a-z]/i',
+            '/[^a-z0-9]/i',
+        ], fn ($matches) => strtoupper($matches[0]), $event['event']);
+        $method = preg_replace('/[^a-z0-9]/i', '', $method);
+
+        try {
+            $this->checkMethodExists($container, $method, $id);
+        } catch (InvalidArgumentException) {
+            $method = '__invoke';
+
+            $this->checkMethodExists($container, $method, $id);
+        } finally {
+            return $method;
         }
     }
 

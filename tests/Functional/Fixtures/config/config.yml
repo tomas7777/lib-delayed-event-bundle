@@ -15,20 +15,22 @@ doctrine:
     charset: UTF8
 
 services:
-  some_event_listener:
-    class: Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Listener\SomeEventListener
-    public: true
-    tags:
-      - { name: 'tjovaisas.event_listener.post_flush', event: !php/const Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Events::ON_EVENT, method: 'onEvent' }
+  _defaults:
+    autoconfigure: true
 
-  some_other_event_listener:
-    class: Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Listener\SomeOtherEventListener
+  invoke_event_listener:
+    class: Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Listener\InvokeEventListener
     public: true
     tags:
       - { name: 'tjovaisas.event_listener.post_flush', event: !php/const Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Events::ON_EVENT, priority: 1 }
 
-  no_named_event_listener:
-    class: Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Listener\NoNamedEventListener
+  configured_event_listener:
+    class: Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Listener\ConfiguredEventListener
     public: true
     tags:
-      - { name: 'tjovaisas.event_listener.post_flush', event: 'Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Event\SomeEvent', method: 'onEvent' }
+      - { name: 'tjovaisas.event_listener.post_flush', event: 'Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Event\SomeEvent', method: 'onFQCNEvent' }
+      - { name: 'tjovaisas.event_listener.post_flush', event: !php/const Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Events::ON_EVENT, method: 'onEvent' }
+
+  attribute_event_listener:
+    class: Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Listener\AttributeEventListener
+    public: true

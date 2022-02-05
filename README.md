@@ -26,19 +26,6 @@ composer require tjovaisas/delayed-event-bundle
 
 ### Register the bundle:
 
-**Symfony 3.x version:**\
-Register bundle into `AppKernel.php`:
-```php
-public function registerBundles()
-{
-    return [
-        // ...
-        new \Tjovaisas\Bundle\DelayedEventBundle\TjovaisasDelayedEventBundle(),
-    ];
-}
-```
-
-**Symfony 4.x version:**\
 Register bundle into `config/bundles.php`:
 ```php
 return [
@@ -49,12 +36,29 @@ return [
 
 ## Usage
 
-The only thing that's needed is to change the default tag from `kernel.event_listener` to `tjovaisas.event_listener.post_flush`:
-```
+Bundle can be configured either using service's configuration's definition or by using attributes:
+- Default `kernel.event_listener` tag can be changed to `tjovaisas.event_listener.post_flush` to dispatch message to the given listener after flush occured:
+```xml
 <service class="Namespace\SomeListener"
          id="namespace.some_listener">
     <tag name="tjovaisas.event_listener.post_flush" event="some_event" method="onEvent" priority="1" />
 </service>
+```
+- Using attributes. Attribute can be defined either on the whole class
+```php
+#[AsDelayedEventListener(event: 'some_event', method: 'onEvent', priority: 1)]
+class SomeListener
+{
+    //...
+}
+```
+or on classes method (only for Symfony ^6.0):
+```php
+#[AsDelayedEventListener(event: 'some_event')]
+public function onEvent(): void
+{
+    //...
+}
 ```
 
 ## Caviats

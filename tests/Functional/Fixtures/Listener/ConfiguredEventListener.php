@@ -6,9 +6,14 @@ namespace Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Listener
 
 use Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Event\SomeEvent;
 
-class SomeOtherEventListener
+class ConfiguredEventListener
 {
-    public function __invoke(SomeEvent $someEvent): void
+    public function onEvent(SomeEvent $someEvent): void
+    {
+        // intentionally left empty
+    }
+
+    public function onFQCNEvent(SomeEvent $someEvent): void
     {
         // intentionally left empty
     }

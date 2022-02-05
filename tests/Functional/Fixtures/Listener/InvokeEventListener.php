@@ -6,9 +6,9 @@ namespace Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Listener
 
 use Tjovaisas\Bundle\DelayedEventBundle\Tests\Functional\Fixtures\Event\SomeEvent;
 
-class NoNamedEventListener
+class InvokeEventListener
 {
-    public function onEvent(SomeEvent $someEvent): void
+    public function __invoke(SomeEvent $someEvent): void
     {
         // intentionally left empty
     }
